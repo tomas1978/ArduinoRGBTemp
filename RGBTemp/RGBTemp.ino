@@ -19,15 +19,19 @@ float sensorToTemp(int analogPort) {
 
 void loop()
 {
-  digitalWrite(greenPin,LOW);
   float temperature=sensorToTemp(0);
   if(temperature>25) {
     digitalWrite(redPin,HIGH);
+  digitalWrite(greenPin,LOW);
     digitalWrite(bluePin,LOW);
-  }
-  else {
+  } else if(temperature<18) {
     digitalWrite(redPin,LOW);
+  digitalWrite(greenPin,LOW);
     digitalWrite(bluePin,HIGH);
+  } else {
+    digitalWrite(redPin,LOW);
+    digitalWrite(greenPin,HIGH);
+    digitalWrite(bluePin,LOW);
   }
   Serial.println(temperature);  
   delay(10);
